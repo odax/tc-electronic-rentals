@@ -37,10 +37,10 @@ export const CalculatorFrame = () => {
               <Col sm={8}>
                 <Tab.Content>
                   <Tab.Pane eventKey="#link1">
-                    <Calculator type="l2o" />
+                    <Calculator calcType="l2o" />
                   </Tab.Pane>
                   <Tab.Pane eventKey="#link2">
-                    <Calculator type="rental" />
+                    <Calculator calcType="rental" />
                   </Tab.Pane>
                 </Tab.Content>
               </Col>

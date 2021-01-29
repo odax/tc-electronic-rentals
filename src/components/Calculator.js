@@ -7,7 +7,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 export const Calculator = (props) => {
-  const [calcType, setCalcType] = useState(props);
+  const [calcType, setCalcType] = useState(props.calcType);
   const [displayPrice, setDisplayPrice] = useState(false);
   const [msrp, setMsrp] = useState(0);
   const [length, setLength] = useState(0);
@@ -18,8 +18,8 @@ export const Calculator = (props) => {
   const [calcTotal, setCalcTotal] = useState(0);
 
   useEffect(() => {
-    setCalcType(props);
-  }, [props]);
+    setCalcType(props.calcType);
+  }, [props.calcType]);
 
   useEffect(() => {
     if (msrp !== 0 && length !== 0 && credit !== 0) {
@@ -37,37 +37,43 @@ export const Calculator = (props) => {
     let monthlyPaymentHolder;
     let buyoutHolder = 0;
     if (calcType === "l2o") {
-      if (credit === 1) {
+      console.log("rates: " + rates["l2o"]["low"][length]);
+      console.log("msrp: " + msrp);
+      console.log(msrp * rates["l2o"]["low"][length]);
+      if (credit == 1) {
         //lowest credit
-        totalPriceHolder = msrp * rates["l20"]["low"][length];
+        totalPriceHolder = msrp * rates["l2o"]["low"][length];
+        console.log(credit);
       }
-      if (credit === 2) {
+      if (credit == 2) {
         //medium credit
-        totalPriceHolder = msrp * rates["l20"]["medium"][length];
+        totalPriceHolder = msrp * rates["l2o"]["medium"][length];
       }
-      if (credit === 1) {
+      if (credit == 3) {
         //high credit
-        totalPriceHolder = msrp * rates["l20"]["high"][length];
+        totalPriceHolder = msrp * rates["l2o"]["high"][length];
       }
+      console.log("meow" + totalPriceHolder);
+      totalPriceHolder = totalPriceHolder - downPayment;
       monthlyPaymentHolder = totalPriceHolder / length;
       console.log(monthlyPaymentHolder);
       setCalcPayment(monthlyPaymentHolder);
       setCalcTotal(totalPriceHolder);
       setCalcBuyout(0);
     } else if (calcType === "rental") {
-      if (credit === 1) {
+      if (credit == 1) {
         //lowest credit
         monthlyPaymentHolder = msrp * rates["rental"]["low"]["month"];
       }
-      if (credit === 2) {
+      if (credit == 2) {
         //medium credit
         monthlyPaymentHolder = msrp * rates["rental"]["medium"]["month"];
       }
-      if (credit === 1) {
+      if (credit == 3) {
         //high credit
         monthlyPaymentHolder = msrp * rates["rental"]["high"]["month"];
       }
-      let buyoutHolder = msrp * rates["rental"]["low"]["buyout"];
+      buyoutHolder = msrp * rates["rental"]["low"]["buyout"];
       // all buyout prices are the same, not using this now, however.
       setCalcPayment(monthlyPaymentHolder);
       setCalcTotal(0);
@@ -76,6 +82,7 @@ export const Calculator = (props) => {
 
   return (
     <Container fluid>
+      type: {calcType}
       msrp: {msrp}
       down: {downPayment}
       credit: {credit}
@@ -104,7 +111,7 @@ export const Calculator = (props) => {
               <option value="24">24 Months</option>
             </Form.Control>
           </Form.Group>
-          <Form.Group controlId="exampleForm.ControlInput1">
+          <Form.Group controlId="exampleForm.ControlInput2">
             <Form.Label>Down Payment</Form.Label>
             <Form.Control
               type="number"
@@ -112,7 +119,7 @@ export const Calculator = (props) => {
               onChange={(e) => setDownPayment(e.target.value)}
             />
           </Form.Group>
-          <Form.Group controlId="exampleForm.ControlSelect1">
+          <Form.Group controlId="exampleForm.ControlSelect2">
             <Form.Label>Credit Score</Form.Label>
             <Form.Control
               as="select"

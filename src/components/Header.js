@@ -5,10 +5,10 @@ import Col from "react-bootstrap/Col";
 
 export const Header = () => {
   return (
-    <Container fluid style={{ background: "white" }}>
+    <Container fluid>
       <Row>
-        <Col style={{ border: "1px solid red" }}></Col>
-        <Col xs={6} style={{ border: "2px solid green" }}>
+        <Col></Col>
+        <Col xs={6}>
           <img
             alt="TC Electronic Rental Text with laptop icon"
             src={process.env.PUBLIC_URL + "/logo.png"}

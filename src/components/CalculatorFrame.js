@@ -24,7 +24,7 @@ export const CalculatorFrame = () => {
               id="list-group-tabs-example"
               defaultActiveKey="#link1"
             >
-              <Col sm={6}>
+              <Col sm={4}>
                 <ListGroup>
                   <ListGroup.Item action href="#link1">
                     Lease-To-Own
@@ -34,7 +34,7 @@ export const CalculatorFrame = () => {
                   </ListGroup.Item>
                 </ListGroup>
               </Col>
-              <Col sm={6}>
+              <Col sm={8}>
                 <Tab.Content>
                   <Tab.Pane eventKey="#link1">
                     <Calculator type="l2o" />

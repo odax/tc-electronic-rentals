@@ -9,6 +9,7 @@ function App() {
     <div className="App">
       <Header />
       <Information />
+      <hr/>
       <CalculatorFrame />
     </div>
   );

@@ -23,7 +23,7 @@ export const Calculator = (props) => {
 
   useEffect(() => {
     if (msrp !== 0 && length !== 0 && credit !== 0) {
-      calculateFields();
+      calculateFields(props);
       setDisplayPrice(true);
     } else {
       if (displayPrice === true) {
@@ -32,7 +32,11 @@ export const Calculator = (props) => {
     }
   }, [msrp, length, downPayment, credit, displayPrice]);
 
-  function calculateFields() {
+  function clip(number) {
+    return Math.round(number * 100) / 100;
+  }
+
+  function calculateFields(props) {
     let totalPriceHolder;
     let monthlyPaymentHolder;
     let buyoutHolder = 0;
@@ -56,8 +60,10 @@ export const Calculator = (props) => {
       console.log("meow" + totalPriceHolder);
       totalPriceHolder = totalPriceHolder - downPayment;
       monthlyPaymentHolder = totalPriceHolder / length;
+      monthlyPaymentHolder = clip(monthlyPaymentHolder);
       console.log(monthlyPaymentHolder);
       setCalcPayment(monthlyPaymentHolder);
+      props.setMonthlyPrice(monthlyPaymentHolder);
       setCalcTotal(totalPriceHolder);
       setCalcBuyout(0);
     } else if (calcType === "rental") {
@@ -75,18 +81,20 @@ export const Calculator = (props) => {
       }
       buyoutHolder = msrp * rates["rental"]["low"]["buyout"];
       // all buyout prices are the same, not using this now, however.
+      monthlyPaymentHolder = clip(monthlyPaymentHolder);
       setCalcPayment(monthlyPaymentHolder);
+      props.setMonthlyPrice(monthlyPaymentHolder);
       setCalcTotal(0);
     }
   }
 
   return (
     <Container fluid>
-      type: {calcType}
+      {/* type: {calcType}
       msrp: {msrp}
       down: {downPayment}
       credit: {credit}
-      length: {length}
+      length: {length} */}
       <Row>
         <Form>
           <Form.Group controlId="exampleForm.ControlInput1">
@@ -135,12 +143,6 @@ export const Calculator = (props) => {
             Get Price
           </Button> */}
         </Form>
-        {displayPrice === true && (
-          <div>
-            <h2>Monthly Payment: {calcPayment} + Tax</h2>
-            <h2>Total Cost: {calcTotal} + Tax</h2>
-          </div>
-        )}
       </Row>
     </Container>
   );

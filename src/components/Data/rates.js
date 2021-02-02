@@ -24,15 +24,15 @@ export const rates = {
   },
   rental: {
     low: {
-      month: 0.93,
+      month: 0.153,
       buyout: 1.4,
     },
     medium: {
-      month: 0.83,
+      month: 0.143,
       buyout: 1.4,
     },
     high: {
-      month: 0.73,
+      month: 0.133,
       buyout: 1.4,
     },
   },

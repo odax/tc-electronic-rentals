@@ -22,12 +22,26 @@ export const Calculator = (props) => {
   }, [props.calcType]);
 
   useEffect(() => {
-    if (msrp !== 0 && length !== 0 && credit !== 0) {
-      calculateFields(props);
-      setDisplayPrice(true);
-    } else {
+    console.log('running use effect');
+    if (calcType === "l2o") {
+      if (msrp !== 0 && length !== 0 && credit !== 0) {
+        calculateFields(props);
+        setDisplayPrice(true);
+      } else {
       if (displayPrice === true) {
         setDisplayPrice(false);
+      }
+    }
+  }
+    if (calcType === "rental") {
+      console.log('its rental');
+      if (msrp !== 0 && credit !== 0) {
+        calculateFields(props);
+        setDisplayPrice(true);
+      } else {
+      if (displayPrice === true) {
+        setDisplayPrice(false);
+        }
       }
     }
   }, [msrp, length, downPayment, credit, displayPrice]);
@@ -37,6 +51,7 @@ export const Calculator = (props) => {
   }
 
   function calculateFields(props) {
+    console.log('running calc fields');
     let totalPriceHolder;
     let monthlyPaymentHolder;
     let buyoutHolder = 0;
@@ -79,12 +94,10 @@ export const Calculator = (props) => {
         //high credit
         monthlyPaymentHolder = msrp * rates["rental"]["high"]["month"];
       }
-      buyoutHolder = msrp * rates["rental"]["low"]["buyout"];
       // all buyout prices are the same, not using this now, however.
       monthlyPaymentHolder = clip(monthlyPaymentHolder);
       setCalcPayment(monthlyPaymentHolder);
       props.setMonthlyPrice(monthlyPaymentHolder);
-      setCalcTotal(0);
     }
   }
 
@@ -105,7 +118,9 @@ export const Calculator = (props) => {
               onChange={(e) => setMsrp(e.target.value)}
             />
           </Form.Group>
-          <Form.Group controlId="exampleForm.ControlSelect1">
+          {calcType === "l2o" && (
+            <div>
+            <Form.Group controlId="exampleForm.ControlSelect1">
             <Form.Label>Length of Rental</Form.Label>
             <Form.Control
               as="select"
@@ -127,6 +142,8 @@ export const Calculator = (props) => {
               onChange={(e) => setDownPayment(e.target.value)}
             />
           </Form.Group>
+          </div>
+          )}
           <Form.Group controlId="exampleForm.ControlSelect2">
             <Form.Label>Credit Score</Form.Label>
             <Form.Control

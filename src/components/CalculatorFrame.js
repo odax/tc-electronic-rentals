@@ -14,7 +14,7 @@ export const CalculatorFrame = () => {
     <Container fluid style={{ background: "white" }}>
       <Row>
         <Col></Col>
-        <Col xs={6}>
+        <Col xs={12} md={6}>
           <Row>
             <Col></Col>
             <Col>
@@ -28,7 +28,7 @@ export const CalculatorFrame = () => {
               defaultActiveKey="#link1"
             >
               <Col sm={4}>
-                <ListGroup>
+                <ListGroup style={{marginTop: 32}}>
                   <ListGroup.Item action href="#link1">
                     Lease-To-Own
                   </ListGroup.Item>
@@ -38,7 +38,7 @@ export const CalculatorFrame = () => {
                 </ListGroup>
                 <div style={{marginTop: '10px'}}>
                 {monthlyPrice !== 0 && (
-                    <h4>Monthly Payment: ${monthlyPrice} + Tax</h4>
+                    <h4 style={{border: '1px solid green'}}>Monthly Payment: ${monthlyPrice} + Tax</h4>
                 )}
                 </div>
               </Col>
@@ -57,6 +57,9 @@ export const CalculatorFrame = () => {
         </Col>
         <Col></Col>
       </Row>
+      <div style={{height: 250}}>
+
+      </div>
     </Container>
   );
 };

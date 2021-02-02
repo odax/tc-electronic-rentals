@@ -8,12 +8,12 @@ export const Information = () => {
     <Container fluid style={{ background: "white" }}>
       <Row>
         <Col></Col>
-        <Col>Call Us: <a href="tel:231-303-1133">231-303-1133</a> | Our <a href="https://www.facebook.com/TC-Electronic-Rentals-107055251357324/">Facebook!</a></Col>
+        <Col xs={12} md={6} >Call Us: <a href="tel:231-303-1133">231-303-1133</a> | Our <a href="https://www.facebook.com/TC-Electronic-Rentals-107055251357324/">Facebook!</a></Col>
         <Col></Col>
       </Row>
       <Row>
         <Col></Col>
-        <Col xs={6}>
+        <Col xs={12} md={6}>
           <p>
             TC Electronic Rentals was established January of 2021. We offer
             custom short-term rentals, lease-to-own rentals, and long term

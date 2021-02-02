@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { rates } from "./Data/rates";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 
 export const Calculator = (props) => {
   const [calcType, setCalcType] = useState(props.calcType);
